@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Calculatrice Simple</title>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            width: 90%;
+            max-width: 400px;
+            padding: 20px;
+            border: 1px solid #444;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(255,255,255,0.1);
+            background-color: #111;
+        }
+        .display {
+            font-size: 2em;
+            margin-bottom: 15px;
+            padding: 15px;
+            border: 1px solid #555;
+            background: #222;
+            border-radius: 5px;
+            color: #fff;
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            justify-content: center;
+        }
+        .buttons button {
+            font-size: 1.4em;
+            padding: 15px;
+            cursor: pointer;
+            background-color: #fff;
+            color: #000;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 2px 2px 5px rgba(255,255,255,0.2);
+        }
+        .buttons button:hover {
+            background-color: #ddd;
+        }
+    </style>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js')
+            .then(() => console.log("Service Worker enregistré !"))
+            .catch(error => console.log("Erreur Service Worker :", error));
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="display" id="total">0 €</div>
+        <div class="buttons">
+            <button onclick="add(1.90)">Café 1,90€</button>
+            <button onclick="add(2.00)">Déca / Noisette 2€</button>
+            <button onclick="add(13.90)">PDJ 13,90€</button>
+            <button onclick="add(18.00)">Formule 18€</button>
+            <button onclick="add(3.50)">Soda 3,50€</button>
+            <button onclick="add(3.00)">Eau 3€</button>
+            <button onclick="add(4.50)">Vin 4,50€</button>
+            <button onclick="add(3.50)">Glace 3,50€</button>
+            <button onclick="add(7.00)">Sandwich 7€</button>
+            <button onclick="add(3.00)">Cookie 3€</button>
+            <button onclick="add(2.90)">Yeti 2,90€</button>
+            <button onclick="add(1.50)">Bonbon 1,50€</button>
+            <button onclick="reset()">Réinitialiser</button>
+        </div>
+    </div>
+
+    <script>
+        let total = 0;
+        function add(amount) {
+            total += amount;
+            document.getElementById('total').textContent = total.toFixed(2) + ' €';
+        }
+        function reset() {
+            total = 0;
+            document.getElementById('total').textContent = '0 €';
+        }
+    </script>
+</body>
+</html>
