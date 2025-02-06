@@ -72,37 +72,29 @@
         <div class="display" id="history"></div>
         <div class="display" id="total">0 €</div>
         <div class="buttons">
-            <button onclick="add(1.90)">Café 1,90€</button>
-            <button onclick="add(2.00)">Déca / Noisette 2€</button>
-            <button onclick="add(13.90)">PDJ 13,90€</button>
-            <button onclick="add(18.00)">Formule 18€</button>
-            <button onclick="add(3.50)">Soda 3,50€</button>
-            <button onclick="add(3.00)">Eau 3€</button>
-            <button onclick="add(4.50)">V.VIN / EMKIPOP 4,50€</button>
-            <button onclick="add(3.50)">Glace 3,50€</button>
-            <button onclick="add(7.00)">Sandwich 7€</button>
-            <button onclick="add(3.00)">Cookie 3€</button>
-            <button onclick="add(2.90)">Yeti 2,90€</button>
-            <button onclick="add(1.50)">Bonbon 1,50€</button>
+            <button onclick="add(1.90, 'Café')">Café 1,90€</button>
+            <button onclick="add(2.00, 'Déca / Noisette / Allongé')">Déca / Noisette / Allongé 2,00€</button>
+            <button onclick="add(13.90, 'PDJ')">PDJ 13,90€</button>
+            <button onclick="add(18.00, 'Formule')">Formule 18€</button>
+            <button onclick="add(3.50, 'Soda')">Soda 3,50€</button>
+            <button onclick="add(3.00, 'Eau')">Eau 3€</button>
+            <button onclick="add(4.50, 'V.VIN / PRESSION')">V.VIN / PRESSION 4,50€</button>
+            <button onclick="add(4.50, 'EMKIPOP')">EMKIPOP 4,50€</button>
+            <button onclick="add(7.00, 'Sandwich')">Sandwich 7€</button>
+            <button onclick="add(3.00, 'Cookie')">Cookie 3€</button>
+            <button onclick="add(2.90, 'Yeti')">Yeti 2,90€</button>
+            <button onclick="add(1.50, 'Bonbon')">Bonbon 1,50€</button>
+            <button onclick="add(2.50, 'M&M's / Chips petit')">M&M's / Chips Petit 2,50€</button>
+            <button onclick="add(4.00, 'Chips Grand')">Chips Grand 4€</button>
+            <button onclick="add(1.00, 'Sucette')">Sucette 1€</button>
             <button onclick="reset()" style="background-color: red; color: white;">C</button>
         </div>
     </div>
 
     <script>
         let total = 0;
-        function add(amount) {
-            total += amount;
-            document.getElementById('total').textContent = total.toFixed(2) + ' €';
-        }
-        function reset() {
-            total = 0;
-            document.getElementById('total').textContent = '0 €';
-        }
-    </script>
-
-    <script>
         let history = [];
-        
+
         function add(amount, label) {
             total += amount;
             history.push(label + ' (' + amount.toFixed(2) + ' €)');
@@ -110,7 +102,7 @@
             document.getElementById('history').textContent = history.join(" | ");
             document.getElementById('total').textContent = total.toFixed(2) + ' €';
         }
-        
+
         function reset() {
             total = 0;
             history = [];
