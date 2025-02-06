@@ -22,12 +22,23 @@
         }
         .container {
             width: 90%;
-            max-width: 400px;
+            max-width: 600px;
             padding: 20px;
             border: 1px solid #444;
             border-radius: 10px;
             box-shadow: 2px 2px 10px rgba(255,255,255,0.1);
             background-color: #111;
+        }
+        .history {
+            font-size: 1em;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #555;
+            background: #222;
+            border-radius: 5px;
+            color: #fff;
+            max-height: 150px;
+            overflow-y: auto;
         }
         .display {
             font-size: 2em;
@@ -40,12 +51,12 @@
         }
         .buttons {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 10px;
             justify-content: center;
         }
         .buttons button {
-            font-size: 1.4em;
+            font-size: 1.2em;
             padding: 15px;
             cursor: pointer;
             background-color: #fff;
@@ -69,33 +80,43 @@
 </head>
 <body>
     <div class="container">
+        <div class="history" id="history">Historique : </div>
         <div class="display" id="total">0 €</div>
         <div class="buttons">
-            <button onclick="add(1.90)">Café 1,90€</button>
-            <button onclick="add(2.00)">Déca / Noisette 2€</button>
-            <button onclick="add(13.90)">PDJ 13,90€</button>
-            <button onclick="add(18.00)">Formule 18€</button>
-            <button onclick="add(3.50)">Soda 3,50€</button>
-            <button onclick="add(3.00)">Eau 3€</button>
-            <button onclick="add(4.50)">Vin 4,50€</button>
-            <button onclick="add(3.50)">Glace 3,50€</button>
-            <button onclick="add(7.00)">Sandwich 7€</button>
-            <button onclick="add(3.00)">Cookie 3€</button>
-            <button onclick="add(2.90)">Yeti 2,90€</button>
-            <button onclick="add(1.50)">Bonbon 1,50€</button>
-            <button onclick="reset()">Réinitialiser</button>
+            <button onclick="add(1.90, 'CAFÉ 1,90€')">CAFÉ 1,90€</button>
+            <button onclick="add(2.00, 'DÉCA / NOISETTE / ALLONGÉ 2,00€')">DÉCA / NOISETTE / ALLONGÉ 2,00€</button>
+            <button onclick="add(13.90, 'PDJ 13,90€')">PDJ 13,90€</button>
+            <button onclick="add(18.00, 'FORMULE 18€')">FORMULE 18€</button>
+            <button onclick="add(3.50, 'SODA 3,50€')">SODA 3,50€</button>
+            <button onclick="add(3.00, 'EAU 3€')">EAU 3€</button>
+            <button onclick="add(4.50, 'V.VIN / PRESSION 4,50€')">V.VIN / PRESSION 4,50€</button>
+            <button onclick="add(3.50, 'GLACE 3,50€')">GLACE 3,50€</button>
+            <button onclick="add(7.00, 'SANDWICH 7€')">SANDWICH 7€</button>
+            <button onclick="add(3.00, 'COOKIE 3€')">COOKIE 3€</button>
+            <button onclick="add(2.90, 'YETI 2,90€')">YETI 2,90€</button>
+            <button onclick="add(1.50, 'BONBON 1,50€')">BONBON 1,50€</button>
+            <button onclick="add(4.50, 'EMKIPOP 4,50€')">EMKIPOP 4,50€</button>
+            <button onclick="add(2.50, 'M&M'S / CHIPS PETIT 2,50€')">M&M'S / CHIPS PETIT 2,50€</button>
+            <button onclick="add(4.00, 'CHIPS GRAND 4€')">CHIPS GRAND 4€</button>
+            <button onclick="add(1.00, 'SUCETTE 1€')">SUCETTE 1€</button>
+            <button onclick="reset()">RÉINITIALISER</button>
         </div>
     </div>
 
     <script>
         let total = 0;
-        function add(amount) {
+        let history = [];
+        function add(amount, item) {
             total += amount;
+            history.push(item);
             document.getElementById('total').textContent = total.toFixed(2) + ' €';
+            document.getElementById('history').textContent = 'Historique : ' + history.join(' | ');
         }
         function reset() {
             total = 0;
+            history = [];
             document.getElementById('total').textContent = '0 €';
+            document.getElementById('history').textContent = 'Historique : ';
         }
     </script>
 </body>
