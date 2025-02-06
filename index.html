@@ -6,9 +6,10 @@
     <title>Calculatrice Simple</title>
     <link rel="manifest" href="manifest.json">
     <style>
+        body { margin-top: 0 !important; padding-top: 0 !important; }
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
+            text-align: center; text-transform: uppercase;
             background-color: #000;
             color: #fff;
             margin: 0;
@@ -39,7 +40,7 @@
         }
         .buttons {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 10px;
             justify-content: center;
         }
@@ -68,6 +69,7 @@
 </head>
 <body>
     <div class="container">
+        <div class="display" id="history"></div>
         <div class="display" id="total">0 €</div>
         <div class="buttons">
             <button onclick="add(1.90)">Café 1,90€</button>
@@ -76,13 +78,13 @@
             <button onclick="add(18.00)">Formule 18€</button>
             <button onclick="add(3.50)">Soda 3,50€</button>
             <button onclick="add(3.00)">Eau 3€</button>
-            <button onclick="add(4.50)">Vin 4,50€</button>
+            <button onclick="add(4.50)">V.VIN / EMKIPOP 4,50€</button>
             <button onclick="add(3.50)">Glace 3,50€</button>
             <button onclick="add(7.00)">Sandwich 7€</button>
             <button onclick="add(3.00)">Cookie 3€</button>
             <button onclick="add(2.90)">Yeti 2,90€</button>
             <button onclick="add(1.50)">Bonbon 1,50€</button>
-            <button onclick="reset()">Réinitialiser</button>
+            <button onclick="reset()" style="background-color: red; color: white;">C</button>
         </div>
     </div>
 
@@ -97,5 +99,25 @@
             document.getElementById('total').textContent = '0 €';
         }
     </script>
+
+    <script>
+        let history = [];
+        
+        function add(amount, label) {
+            total += amount;
+            history.push(label + ' (' + amount.toFixed(2) + ' €)');
+            if (history.length > 5) { history.shift(); }  // Garder les 5 dernières entrées
+            document.getElementById('history').textContent = history.join(" | ");
+            document.getElementById('total').textContent = total.toFixed(2) + ' €';
+        }
+        
+        function reset() {
+            total = 0;
+            history = [];
+            document.getElementById('history').textContent = '';
+            document.getElementById('total').textContent = '0 €';
+        }
+    </script>
+
 </body>
 </html>
