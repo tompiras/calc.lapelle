@@ -16,13 +16,12 @@
             padding: 0;
             height: 100vh;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
         }
         .container {
             width: 90%;
-            max-width: 600px;
+            max-width: 800px;
             padding: 20px;
             border: 1px solid #444;
             border-radius: 10px;
@@ -51,13 +50,13 @@
         }
         .buttons {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);  /* Four columns */
             gap: 10px;
             justify-content: center;
         }
         .buttons button {
             font-size: 1.2em;
-            padding: 15px;
+            padding: 12px;
             cursor: pointer;
             background-color: #fff;
             color: #000;
@@ -65,6 +64,7 @@
             border: none;
             border-radius: 10px;
             box-shadow: 2px 2px 5px rgba(255,255,255,0.2);
+            text-transform: uppercase;
         }
         .buttons button:hover {
             background-color: #ddd;
@@ -74,6 +74,7 @@
             color: red;
             border-radius: 50%;
             font-weight: bold;
+            grid-column: 4;  /* Move AC button to the fourth column */
         }
     </style>
     <script>
@@ -90,16 +91,17 @@
         <div class="display" id="total">0 €</div>
         <div class="buttons">
             <button onclick="add(18.00, 'FORMULE 18€')">FORMULE 18€</button>
+            <button onclick="add(22.00, 'FORMULE 22€')">FORMULE 22€</button>
             <button onclick="add(13.90, 'PDJ 13,90€')">PDJ 13,90€</button>
             <button onclick="add(7.00, 'SANDWICH 7€')">SANDWICH 7€</button>
             <button onclick="add(1.90, 'CAFÉ 1,90€')">CAFÉ 1,90€</button>
             <button onclick="add(2.00, 'DÉCA / NOISETTE / ALLONGÉ 2,00€')">DÉCA / NOISETTE / ALLONGÉ 2,00€</button>
             <button onclick="add(3.60, 'CAFÉ GRAND CRÈME 3,60€')">CAFÉ GRAND CRÈME 3,60€</button>
             <button onclick="add(4.50, 'THÉ 4,50€')">THÉ 4,50€</button>
-            <button onclick="add(4.00, 'CHOCOLAT CHAUD 4€')">CHOCOLAT CHAUD 4€</button>
-            <button onclick="add(5.00, 'CAFÉ FRAPPE 5€')">CAFÉ FRAPPE 5€</button>
             <button onclick="add(3.00, 'EAU 3€')">EAU 3€</button>
             <button onclick="add(3.50, 'SODA 3,50€')">SODA 3,50€</button>
+            <button onclick="add(4.00, 'CHOCOLAT CHAUD 4€')">CHOCOLAT CHAUD 4€</button>
+            <button onclick="add(5.00, 'CAFÉ FRAPPE 5€')">CAFÉ FRAPPE 5€</button>
             <button onclick="add(4.50, 'V.VIN / PRESSION 4,50€')">V.VIN / PRESSION 4,50€</button>
             <button onclick="add(8.00, 'PINTE 8€')">PINTE 8€</button>
             <button onclick="add(3.00, 'RICARD 3€')">RICARD 3€</button>
