@@ -69,6 +69,12 @@
         .buttons button:hover {
             background-color: #ddd;
         }
+        .ac-button {
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            font-weight: bold;
+        }
     </style>
     <script>
         if ('serviceWorker' in navigator) {
@@ -85,21 +91,22 @@
         <div class="buttons">
             <button onclick="add(1.90, 'CAFÉ 1,90€')">CAFÉ 1,90€</button>
             <button onclick="add(2.00, 'DÉCA / NOISETTE / ALLONGÉ 2,00€')">DÉCA / NOISETTE / ALLONGÉ 2,00€</button>
-            <button onclick="add(13.90, 'PDJ 13,90€')">PDJ 13,90€</button>
-            <button onclick="add(18.00, 'FORMULE 18€')">FORMULE 18€</button>
+            <button onclick="add(3.60, 'CAFÉ GRAND CRÈME 3,60€')">CAFÉ GRAND CRÈME 3,60€</button>
+            <button onclick="add(4.50, 'THÉ 4,50€')">THÉ 4,50€</button>
+            <button onclick="add(4.00, 'CHOCOLAT CHAUD 4€')">CHOCOLAT CHAUD 4€</button>
+            <button onclick="add(5.00, 'CAFÉ FRAPPE 5€')">CAFÉ FRAPPE 5€</button>
+            <button onclick="add(3.90, 'MUFFIN 3,90€')">MUFFIN 3,90€</button>
+            <button onclick="add(7.00, 'SANDWICH 7€')">SANDWICH 7€</button>
             <button onclick="add(3.50, 'SODA 3,50€')">SODA 3,50€</button>
             <button onclick="add(3.00, 'EAU 3€')">EAU 3€</button>
             <button onclick="add(4.50, 'V.VIN / PRESSION 4,50€')">V.VIN / PRESSION 4,50€</button>
             <button onclick="add(3.50, 'GLACE 3,50€')">GLACE 3,50€</button>
-            <button onclick="add(7.00, 'SANDWICH 7€')">SANDWICH 7€</button>
-            <button onclick="add(3.00, 'COOKIE 3€')">COOKIE 3€</button>
             <button onclick="add(2.90, 'YETI 2,90€')">YETI 2,90€</button>
-            <button onclick="add(1.50, 'BONBON 1,50€')">BONBON 1,50€</button>
-            <button onclick="add(4.50, 'EMKIPOP 4,50€')">EMKIPOP 4,50€</button>
             <button onclick="add(2.50, 'M&M'S / CHIPS PETIT 2,50€')">M&M'S / CHIPS PETIT 2,50€</button>
             <button onclick="add(4.00, 'CHIPS GRAND 4€')">CHIPS GRAND 4€</button>
             <button onclick="add(1.00, 'SUCETTE 1€')">SUCETTE 1€</button>
-            <button onclick="reset()">RÉINITIALISER</button>
+            <button onclick="add(4.50, 'EMKIPOP 4,50€')">EMKIPOP 4,50€</button>
+            <button onclick="reset()" class="ac-button">AC</button>
         </div>
     </div>
 
