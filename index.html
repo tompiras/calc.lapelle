@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#000000">
     <title>Calculatrice Simple</title>
     <link rel="manifest" href="manifest.json">
     <style>
@@ -42,7 +41,7 @@
         .display {
             font-size: 2em;
             margin-bottom: 15px;
-            padding: 14px;
+            padding: 15px;
             border: 1px solid #555;
             background: #222;
             border-radius: 5px;
@@ -67,17 +66,16 @@
             border-radius: 10px;
             box-shadow: 2px 2px 5px rgba(255,255,255,0.2);
             text-transform: uppercase;
-               display: flex;
-    flex-direction: column; 
-    align-items: center;
-    justify-content: center;
-}
-
-.buttons button span {
-    font-size: 0.8em;
-    font-weight: bold;
-    margin-top: 5px;
-    display: block;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .buttons button span {
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-top: 5px;
+            display: block;
         }
         .buttons button:hover {
             background-color: #ddd;
@@ -87,16 +85,39 @@
             color: red !important;
             border-radius: 10%;
             font-weight: bold;
-            weight: 60px;
             width: 100%;
-            grid-column: 4;  /* Move AC button to the fourth column */
+            grid-column: 4;
         }
     </style>
     <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('service-worker.js')
-            .then(() => console.log("Service Worker enregistré !"))
-            .catch(error => console.log("Erreur Service Worker :", error));
+        let total = 0;
+        let history = [];
+
+        function add(amount, item) {
+            total += amount;
+            history.push(item);
+            updateDisplay();
+        }
+
+        function removeLastEntry() {
+            if (history.length > 0) {
+                // Enlever la dernière entrée et ajuster le total
+                let lastEntry = history.pop();
+                let lastAmount = parseFloat(lastEntry.split(' ')[1].replace('€', '').replace(',', '.'));
+                total -= lastAmount;
+                updateDisplay();
+            }
+        }
+
+        function updateDisplay() {
+            document.getElementById('total').textContent = total.toFixed(2) + ' €';
+            document.getElementById('history').textContent = 'Historique : ' + history.join(' | ');
+        }
+
+        function reset() {
+            total = 0;
+            history = [];
+            updateDisplay();
         }
     </script>
 </head>
@@ -131,21 +152,8 @@
             <button onclick="add(4.00, 'CHIPS GRAND 4,00€')">CHIPS GRAND <span>4,00€</span> </button>
             <button onclick="add(1.00, 'SUCETTE 1,00€')">SUCETTE <span>1,00€</span> </button>
             <button onclick="reset()" class="c-button">C</button>
+            <button onclick="removeLastEntry()" class="c-button">←</button> <!-- Nouveau bouton ajouté -->
         </div>
     </div>
-
-    <script>
-        let total = 0;
-        let history = [];
-        function add(amount, item) {
-            total += amount;
-            history.push(item);
-            document.getElementById('total').textContent = total.toFixed(2) + ' €';
-        }
-        function reset() {
-            total = 0;
-            document.getElementById('total').textContent = '0 €';
-        }
-    </script>
 </body>
 </html>
