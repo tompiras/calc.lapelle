@@ -104,9 +104,19 @@
             if (history.length > 0) {
                 // Enlever la dernière entrée et ajuster le total
                 let lastEntry = history.pop();
-                let lastAmount = parseFloat(lastEntry.split(' ')[1].replace('€', '').replace(',', '.'));
-                total -= lastAmount;
-                updateDisplay();
+                
+                // Utiliser une expression régulière pour extraire le montant avec €
+                let lastAmountString = lastEntry.match(/(\d+[\.,]?\d*)€/); 
+                
+                if (lastAmountString && lastAmountString[1]) {
+                    let lastAmount = parseFloat(lastAmountString[1].replace(',', '.')); // Convertir en nombre
+                    if (!isNaN(lastAmount)) {  // Vérifie si la conversion a réussi
+                        total -= lastAmount;  // Soustraire le montant du total
+                        updateDisplay();  // Mettre à jour l'affichage
+                    } else {
+                        console.error('Erreur de conversion du montant', lastAmountString[1]);
+                    }
+                }
             }
         }
 
