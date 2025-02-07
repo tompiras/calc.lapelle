@@ -141,26 +141,10 @@
             total += amount;
             history.push(item);
             document.getElementById('total').textContent = total.toFixed(2) + ' €';
-            document.getElementById('history').textContent = 'Historique : ' + history.join(' | ');
-            
-        function removeLastEntry() {
-            if (history.length > 0) {
-                // Enlever la dernière entrée et ajuster le total
-                let lastEntry = history.pop();
-                let lastAmount = parseFloat(lastEntry.split(' ')[1].replace('€', '').replace(',', '.'));
-                total -= lastAmount;
-                updateDisplay();
-            }
-
-        function updateDisplay() {
-            document.getElementById('total').textContent = total.toFixed(2) + ' €';
-            document.getElementById('history').textContent = 'Historique : ' + history.join(' | ');
         }
         function reset() {
             total = 0;
-            history = [];
             document.getElementById('total').textContent = '0 €';
-            document.getElementById('history').textContent = 'Historique : ';
         }
     </script>
 </body>
