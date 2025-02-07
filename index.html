@@ -18,15 +18,21 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow: hidden;
         }
-        .container {
-            width: 90%;
-            max-width: 800px;
-            padding: 20px;
-            border: 1px solid #444;
-            border-radius: 10px;
-            box-shadow: 2px 2px 10px rgba(255,255,255,0.1);
+        .slider {
+            display: flex;
+            width: 200%;  /* Deux pages côte à côte */
+            transition: transform 0.5s ease; /* Transition fluide pour le glissement */
+        }
+        .page {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             background-color: #111;
+            flex-direction: column;
         }
         .history {
             font-size: 1em;
@@ -50,7 +56,7 @@
         }
         .buttons {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);  /* Four columns */
+            grid-template-columns: repeat(4, 1fr);
             gap: 10px;
             justify-content: center;
         }
@@ -71,12 +77,6 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-        }
-        .buttons button span {
-            font-size: 0.8em;
-            font-weight: bold;
-            margin-top: 5px;
-            display: block;
         }
         .buttons button:hover {
             background-color: #ddd;
@@ -123,47 +123,49 @@
         function updateDisplay() {
             document.getElementById('total').textContent = total.toFixed(2) + ' €';
             document.getElementById('history').textContent = 'Historique : ' + history.join(' | ');
+            document.getElementById('total2').textContent = total.toFixed(2) + ' €';
+            document.getElementById('history2').textContent = 'Historique : ' + history.join(' | ');
         }
 
-        function reset() {
-            total = 0;
-            history = [];
-            updateDisplay();
+        function slideToPage(page) {
+            const slider = document.getElementById('slider');
+            slider.style.transform = `translateX(-${page * 100}%)`;
+        }
+
+        // Fonction pour naviguer manuellement
+        function navigateToPage(page) {
+            slideToPage(page);
         }
     </script>
 </head>
 <body>
-    <div class="container">
-        <div class="history" id="history">Historique : </div>
-        <div class="display" id="total">0 €</div>
-        <div class="buttons">
-            <button onclick="add(18.00, 'FORMULE 18,00€')">FORMULE <span>18,00€</span> </button>
-            <button onclick="add(22.00, 'FORMULE 22,00€')">FORMULE <span>22,00€</span> </button>
-            <button onclick="add(13.90, 'PDJ 13,90€')">PDJ <span>13,90€</span> </button>
-            <button onclick="add(7.00, 'SANDWICH 7,00€')">SANDWICH <span>7,00€</span> </button>
-            <button onclick="add(1.90, 'CAFÉ 1,90€')">CAFÉ <span>1,90€</span> </button>
-            <button onclick="add(2.00, 'DÉCA/NOIS/ALL 2,00€')">DÉCA/NOIS/ALL <span>2,00€</span> </button>
-            <button onclick="add(3.60, 'CAFÉ GR.CRÈME 3,60€')">CAFÉ GR.CRÈME <span>3,60€</span> </button>
-            <button onclick="add(4.50, 'THÉ 4,50€')">THÉ <span>4,50€</span> </button>
-            <button onclick="add(3.00, 'EAU 3,00€')">EAU <span>3,00€</span> </button>
-            <button onclick="add(3.50, 'SODA 3,50€')">SODA <span>3,50€</span> </button>
-            <button onclick="add(4.00, 'CHOCOLAT CHAUD 4,00€')">CHOCOLAT CHAUD <span>4,00€</span> </button>
-            <button onclick="add(5.00, 'CAFÉ FRAPPE 5,00€')">CAFÉ FRAPPE <span>5,00€</span> </button>
-            <button onclick="add(4.50, 'VIN / BIÈRE 4,50€')">VIN / BIÈRE <span>4,50€</span> </button>
-            <button onclick="add(8.00, 'PINTE 8,00€')">PINTE  <span>8,00€</span> </button>
-            <button onclick="add(3.00, 'RICARD 3,00€')">RICARD <span>3,00€</span> </button>
-            <button onclick="add(3.50, 'MAURESQUE 3,50€')">MAURESQUE <span>3,50€</span> </button>
-            <button onclick="add(3.50, 'GLACE 3,50€')">GLACE <span>3,50€</span> </button>
-            <button onclick="add(2.90, 'YETI 2,90€')">YETI <span>2,90€</span> </button>
-            <button onclick="add(4.50, 'EMKIPOP 4,50€')">EMKIPOP <span>4,50€</span> </button>
-            <button onclick="add(3.00, 'COOKIE 3€')">COOKIE <span>3,00€</span> </button>
-            <button onclick="add(3.90, 'MUFFIN 3,90€')">MUFFIN <span>3,90€</span> </button>
-            <button onclick="add(2.50, 'M&M 2,50€')">M&M <span>2,50€</span> </button>
-            <button onclick="add(2.50, 'CHIPS PETIT 2,50€')">CHIPS PETIT <span>2,50€</span> </button>
-            <button onclick="add(4.00, 'CHIPS GRAND 4,00€')">CHIPS GRAND <span>4,00€</span> </button>
-            <button onclick="add(1.00, 'SUCETTE 1,00€')">SUCETTE <span>1,00€</span> </button>
-            <button onclick="reset()" class="c-button">C</button>
-            <button onclick="removeLastEntry()" class="c-button">←</button> <!-- Nouveau bouton ajouté -->
+    <div class="slider" id="slider">
+        <!-- Première page -->
+        <div class="page">
+            <div class="history" id="history">Historique : </div>
+            <div class="display" id="total">0 €</div>
+            <div class="buttons">
+                <button onclick="add(18.00, 'FORMULE 18,00€')">FORMULE <span>18,00€</span> </button>
+                <button onclick="add(22.00, 'FORMULE 22,00€')">FORMULE <span>22,00€</span> </button>
+                <button onclick="add(13.90, 'PDJ 13,90€')">PDJ <span>13,90€</span> </button>
+                <button onclick="add(7.00, 'SANDWICH 7,00€')">SANDWICH <span>7,00€</span> </button>
+                <button onclick="removeLastEntry()" class="c-button">←</button>
+                <button onclick="navigateToPage(1)">Go to Page 2</button> <!-- Bouton pour passer à la deuxième page -->
+            </div>
+        </div>
+
+        <!-- Deuxième page (copie de la première) -->
+        <div class="page">
+            <div class="history" id="history2">Historique : </div>
+            <div class="display" id="total2">0 €</div>
+            <div class="buttons">
+                <button onclick="add(18.00, 'FORMULE 18,00€')">FORMULE <span>18,00€</span> </button>
+                <button onclick="add(22.00, 'FORMULE 22,00€')">FORMULE <span>22,00€</span> </button>
+                <button onclick="add(13.90, 'PDJ 13,90€')">PDJ <span>13,90€</span> </button>
+                <button onclick="add(7.00, 'SANDWICH 7,00€')">SANDWICH <span>7,00€</span> </button>
+                <button onclick="removeLastEntry()" class="c-button">←</button>
+                <button onclick="navigateToPage(0)">Go to Page 1</button> <!-- Bouton pour revenir à la première page -->
+            </div>
         </div>
     </div>
 </body>
