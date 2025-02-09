@@ -41,6 +41,13 @@
             max-height: 400px;
             overflow-y: auto;
             flex-basis: 45%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+        .history div {
+            margin-bottom: 5px;
         }
         .calculator {
             flex-basis: 45%;
@@ -135,11 +142,11 @@
             document.getElementById('total').textContent = total.toFixed(2) + ' €';
 
             // Mise à jour de l'affichage de l'historique avec les quantités
-            let historyText = 'Historique : ';
+            let historyDiv = '';
             for (let product in history) {
-                historyText += `${history[product]} ${product} | `;
+                historyDiv += `<div>${history[product]} ${product}</div>`;
             }
-            document.getElementById('history').textContent = historyText.slice(0, -2); // Retirer le dernier " | "
+            document.getElementById('history').innerHTML = historyDiv;
         }
 
         function reset() {
