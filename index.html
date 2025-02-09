@@ -23,7 +23,7 @@
         .container {
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: flex-start;
             max-width: 1200px;
             width: 90%;
             height: 80%; /* Occupation de 80% de la hauteur */
@@ -53,21 +53,21 @@
             color: #fff;
             max-height: 400px;
             overflow-y: auto;
-            flex-grow: 1; /* L'historique prend le reste de l'espace */
+            width: 20%; /* L'historique prend 20% de la largeur */
+            margin-right: 10px;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
             align-items: flex-start;
-            margin-bottom: 15px;
         }
         .history div {
             margin-bottom: 5px;
         }
         .calculator {
+            width: 80%; /* La calculatrice prend 80% de la largeur */
             display: grid;
             grid-template-columns: repeat(4, 1fr);  /* Quatre colonnes */
             gap: 10px;
-            width: 100%;
             justify-content: center;
         }
         .calculator button {
@@ -102,6 +102,11 @@
             border-radius: 10%;
             font-weight: bold;
             width: 100%;
+        }
+        .buttons-container {
+            display: flex;
+            width: 100%;
+            margin-top: 10px;
         }
     </style>
     <script>
@@ -163,39 +168,42 @@
         <!-- Montant total -->
         <div class="total" id="total">0 €</div>
 
-        <!-- Historique -->
-        <div class="history" id="history">Historique : </div>
-        
-        <!-- Calculatrice -->
-        <div class="calculator">
-            <button onclick="add(18.00, 'FORMULE 18,00€')">FORMULE <span>18,00€</span> </button>
-            <button onclick="add(22.00, 'FORMULE 22,00€')">FORMULE <span>22,00€</span> </button>
-            <button onclick="add(13.90, 'PDJ 13,90€')">PDJ <span>13,90€</span> </button>
-            <button onclick="add(7.00, 'SANDWICH 7,00€')">SANDWICH <span>7,00€</span> </button>
-            <button onclick="add(1.90, 'CAFÉ 1,90€')">CAFÉ <span>1,90€</span> </button>
-            <button onclick="add(2.00, 'DÉCA/NOIS/ALL 2,00€')">DÉCA/NOIS/ALL <span>2,00€</span> </button>
-            <button onclick="add(3.60, 'CAFÉ GR.CRÈME 3,60€')">CAFÉ GR.CRÈME <span>3,60€</span> </button>
-            <button onclick="add(4.50, 'THÉ 4,50€')">THÉ <span>4,50€</span> </button>
-            <button onclick="add(3.00, 'EAU 3,00€')">EAU <span>3,00€</span> </button>
-            <button onclick="add(3.50, 'SODA 3,50€')">SODA <span>3,50€</span> </button>
-            <button onclick="add(4.00, 'CHOCOLAT CHAUD 4,00€')">CHOCOLAT CHAUD <span>4,00€</span> </button>
-            <button onclick="add(5.00, 'CAFÉ FRAPPE 5,00€')">CAFÉ FRAPPE <span>5,00€</span> </button>
-            <button onclick="add(4.50, 'VIN / BIÈRE 4,50€')">VIN / BIÈRE <span>4,50€</span> </button>
-            <button onclick="add(8.00, 'PINTE 8,00€')">PINTE <span>8,00€</span> </button>
-            <button onclick="add(3.00, 'RICARD 3,00€')">RICARD <span>3,00€</span> </button>
-            <button onclick="add(3.50, 'MAURESQUE 3,50€')">MAURESQUE <span>3,50€</span> </button>
-            <button onclick="add(3.50, 'GLACE 3,50€')">GLACE <span>3,50€</span> </button>
-            <button onclick="add(2.90, 'YETI 2,90€')">YETI <span>2,90€</span> </button>
-            <button onclick="add(4.50, 'EMKIPOP 4,50€')">EMKIPOP <span>4,50€</span> </button>
-            <button onclick="add(3.00, 'COOKIE 3,00€')">COOKIE <span>3,00€</span> </button>
-            <button onclick="add(3.90, 'MUFFIN 3,90€')">MUFFIN <span>3,90€</span> </button>
-            <button onclick="add(2.50, 'M&M 2,50€')">M&M <span>2,50€</span> </button>
-            <button onclick="add(2.50, 'CHIPS PETIT 2,50€')">CHIPS PETIT <span>2,50€</span> </button>
-            <button onclick="add(4.00, 'CHIPS GRAND 4,00€')">CHIPS GRAND <span>4,00€</span> </button>
-            <button onclick="add(1.00, 'SUCETTE 1,00€')">SUCETTE <span>1,00€</span> </button>
-            <button onclick="add(1.00, 'PANINI NUTELLA 5,00€')">PANINI NUTELLA <span>5,00€</span> </button>
-            <button onclick="reset()" class="c-button">C</button>
-            <button onclick="removeLastEntry()" class="c-button">←</button>
+        <!-- Historique et Calculatrice -->
+        <div class="buttons-container">
+            <!-- Historique -->
+            <div class="history" id="history">Historique : </div>
+            
+            <!-- Calculatrice -->
+            <div class="calculator">
+                <button onclick="add(18.00, 'FORMULE 18,00€')">FORMULE <span>18,00€</span> </button>
+                <button onclick="add(22.00, 'FORMULE 22,00€')">FORMULE <span>22,00€</span> </button>
+                <button onclick="add(13.90, 'PDJ 13,90€')">PDJ <span>13,90€</span> </button>
+                <button onclick="add(7.00, 'SANDWICH 7,00€')">SANDWICH <span>7,00€</span> </button>
+                <button onclick="add(1.90, 'CAFÉ 1,90€')">CAFÉ <span>1,90€</span> </button>
+                <button onclick="add(2.00, 'DÉCA/NOIS/ALL 2,00€')">DÉCA/NOIS/ALL <span>2,00€</span> </button>
+                <button onclick="add(3.60, 'CAFÉ GR.CRÈME 3,60€')">CAFÉ GR.CRÈME <span>3,60€</span> </button>
+                <button onclick="add(4.50, 'THÉ 4,50€')">THÉ <span>4,50€</span> </button>
+                <button onclick="add(3.00, 'EAU 3,00€')">EAU <span>3,00€</span> </button>
+                <button onclick="add(3.50, 'SODA 3,50€')">SODA <span>3,50€</span> </button>
+                <button onclick="add(4.00, 'CHOCOLAT CHAUD 4,00€')">CHOCOLAT CHAUD <span>4,00€</span> </button>
+                <button onclick="add(5.00, 'CAFÉ FRAPPE 5,00€')">CAFÉ FRAPPE <span>5,00€</span> </button>
+                <button onclick="add(4.50, 'VIN / BIÈRE 4,50€')">VIN / BIÈRE <span>4,50€</span> </button>
+                <button onclick="add(8.00, 'PINTE 8,00€')">PINTE <span>8,00€</span> </button>
+                <button onclick="add(3.00, 'RICARD 3,00€')">RICARD <span>3,00€</span> </button>
+                <button onclick="add(3.50, 'MAURESQUE 3,50€')">MAURESQUE <span>3,50€</span> </button>
+                <button onclick="add(3.50, 'GLACE 3,50€')">GLACE <span>3,50€</span> </button>
+                <button onclick="add(2.90, 'YETI 2,90€')">YETI <span>2,90€</span> </button>
+                <button onclick="add(4.50, 'EMKIPOP 4,50€')">EMKIPOP <span>4,50€</span> </button>
+                <button onclick="add(3.00, 'COOKIE 3,00€')">COOKIE <span>3,00€</span> </button>
+                <button onclick="add(3.90, 'MUFFIN 3,90€')">MUFFIN <span>3,90€</span> </button>
+                <button onclick="add(2.50, 'M&M 2,50€')">M&M <span>2,50€</span> </button>
+                <button onclick="add(2.50, 'CHIPS PETIT 2,50€')">CHIPS PETIT <span>2,50€</span> </button>
+                <button onclick="add(4.00, 'CHIPS GRAND 4,00€')">CHIPS GRAND <span>4,00€</span> </button>
+                <button onclick="add(1.00, 'SUCETTE 1,00€')">SUCETTE <span>1,00€</span> </button>
+                <button onclick="add(1.00, 'PANINI NUTELLA 5,00€')">PANINI NUTELLA <span>5,00€</span> </button>
+                <button onclick="reset()" class="c-button">C</button>
+                <button onclick="removeLastEntry()" class="c-button">←</button>
+            </div>
         </div>
     </div>
 </body>
